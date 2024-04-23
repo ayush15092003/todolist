@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <style>
+        /* CSS styles for the To-Do List App */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #444;
+            color: #fff;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #todoList {
+            width: 400px;
+            padding: 40px;
+            background-color: #222;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            text-align: center; /* Centering the content */
+        }
+
+        h2 {
+            margin-top: 0; /* Remove space before the h2 element */
+            margin-bottom: 40px; /* Double the space below the h2 element */
+            color: #afa;
+            font-size: 40px; /* Set font size to 40px */
+        }
+
+        #logo {
+            margin-bottom: 20px;
+            width: 100px; /* Adjust the width of the logo */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        #taskList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #addTaskForm {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        #newTask {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-right: 10px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        #addButton {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .deleteButton {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        li {
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px; /* Double the space below each task item */
+        }
+    </style>
+</head>
+<body>
+    <div id="todoList">
+        <img src="TODO.png" alt="TODO Logo" id="logo"> <!-- Added logo here -->
+        <h2>TO-DO List</h2> <!-- Set font size to 40px -->
+        <ul id="taskList"></ul>
+        <form id="addTaskForm">
+            <input type="text" id="newTask" placeholder="Enter a new task">
+            <button type="submit" id="addButton">Add Task</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript code for the To-Do List App
+        const taskList = document.getElementById('taskList');
+        const addTaskForm = document.getElementById('addTaskForm');
+        const newTaskInput = document.getElementById('newTask');
+
+        addTaskForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newTask = newTaskInput.value.trim();
+            if (newTask !== '') {
+                const li = document.createElement('li');
+                li.textContent = newTask;
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.classList.add('deleteButton');
+                
+                li.appendChild(deleteButton);
+                taskList.appendChild(li);
+                newTaskInput.value = '';
+            }
+        });
+
+        taskList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('deleteButton')) {
+                const listItem = e.target.parentElement;
+                taskList.removeChild(listItem);
+            }
+        });
+    </script>
+</body>
+</html>
